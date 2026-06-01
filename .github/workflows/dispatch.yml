@@ -1,0 +1,26 @@
+name: dispatch
+on:
+  workflow_dispatch:
+    inputs:
+     logLevel: 
+        description: 'Log level' #⬅️ Description
+        required: true #⬅️ Whether required
+        default: 'warning' #⬅️ Default value
+        type: choice # ⬅️ Field type. This has a specific list of possibilities
+        options: #⬅️ Possible values
+        - info
+        - warning
+        - debug
+     environment:
+        description: 'Environment to run tests against'
+        type: environment       
+jobs:
+  log-the-inputs:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "Log level: $LEVEL"
+          echo "Environment: $ENVIRONMENT"
+        env:
+          LEVEL: ${{ inputs.logLevel }}
+          ENVIRONMENT: ${{ inputs.environment }}
