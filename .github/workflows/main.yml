@@ -6,7 +6,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    environment: test
+    environment: <test>
     steps:
       - name: Get ClI_Secret1
         env:
@@ -57,7 +57,7 @@ jobs:
         run: |
           echo "ENV_SECRET1: $secret" >> ENV_SECRET1.txt
       
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           name: ENV_SECRET1
           path: ENV_SECRET1.txt
