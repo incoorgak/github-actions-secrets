@@ -1,9 +1,6 @@
 name: dispatch
 env:
- INPUT_VALUE: '{
-        version: [10, 22, 24]
-        os: [ubuntu-latest, windows-latest]"
-        }'
+  INPUT_VALUE: '{"version":[10,22,24],"os":["ubuntu-latest","windows-latest"]}'
 on:
   workflow_dispatch:
     inputs:
