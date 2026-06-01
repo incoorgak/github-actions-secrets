@@ -2,13 +2,18 @@ on:
   workflow_dispatch:
 env:
   cat_name: "Puszek"
+  WORKFLOW_VAR: Workflow variable
 jobs:
   display-variables:
     name: ${{vars.ENVIRONMENT_VAR}}
     environment: test
+    env:
+      JOB_VAR: Job Variable
     runs-on: ubuntu-latest
     steps:
     - name: Use variables 1
+      env:
+       STEP_VAR: Step variable 1
       run: |
         echo "Repository variable : ${{vars.REPOSITORY_VAR}}"
         echo "Organization variable : ${{vars.ORGANIZATION_VAR}}"
@@ -19,6 +24,8 @@ jobs:
         echo "Should be variable in step scope:$STEP_VAR"
     
     - name: Use variables 2
+      env:
+       STEP_VAR: Step variable 2
       run: |
         echo "Alice has a cat named <PRINT HERE THE CAT NAME STORED IN THE cat_name VARIABLE>"
         echo "Should be variable in workflow scope:$WORKFLOW_VAR"
@@ -28,6 +35,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Use variables in display-variables2
+      env: 
+       STEP_VAR: Step variable 3
       run: |
         echo "Should be variable in workflow scope:$WORKFLOW_VAR"
         echo "Should NOT be variable in job scope:$JOB_VAR"
