@@ -17,23 +17,15 @@ on:
 jobs:
   log-the-inputs:
     runs-on: ubuntu-latest
-    steps:
-      - run: |
-          echo "Log level: $LEVEL"
-          echo "Environment: $ENVIRONMENT"
-        env:
-          LEVEL: ${{ inputs.logLevel }}
-          ENVIRONMENT: ${{ inputs.environment }}
-  example_matrix:
-    runs-on: ubuntu-latest
     strategy:
       max-parallel: 2
       matrix:  ${{ fromJSON('{"version":[10,22,24],"os":["ubuntu-latest","windows-latest"]}') }}
-       
     steps:
-    - run: echo "Running Node version $version on $os"
-      name: Running Node version ${{ matrix.version }} on ${{ matrix.os }}
-      env:
-        version: ${{ matrix.version }}
-        os: ${{ matrix.os }}
-        
+      - run:  |
+          echo "Running Node version $version on $os"
+          name: Running Node version ${{ matrix.version }} on ${{ matrix.os }}
+        env:
+          version: ${{ matrix.version }}
+          os: ${{ matrix.os }}
+          LEVEL: ${{ inputs.logLevel }}
+          ENVIRONMENT: ${{ inputs.environment }}
